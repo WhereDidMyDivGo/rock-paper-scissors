@@ -1,8 +1,5 @@
-.paper,
-.scissors,
-.rock {
+.option {
   transition: 0.3s;
-  cursor: pointer;
   width: 198px;
   height: 203px;
   flex-shrink: 0;
@@ -12,11 +9,6 @@
   align-items: center;
   position: relative;
   border: 23px solid;
-
-  &:hover {
-    box-shadow: 0 0 0 23px rgba(255, 255, 255, 0.05);
-    transform: scale(1.05);
-  }
 
   &::after {
     content: "";

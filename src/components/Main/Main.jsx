@@ -1,23 +1,24 @@
 import "./Main.css";
 
-import triangle from "../../assets/images/bg-triangle.svg";
-
-import Rock from "../PickOptions/Rock";
-import Paper from "../PickOptions/Paper";
-import Scissors from "../PickOptions/Scissors";
+import { useState } from "react";
+import Choice from "../Choice/Choice";
+import Game from "../Game/Game";
 import Rules from "../Rules/Rules";
 
 function Main() {
+  const [showOptions, setShowOptions] = useState(true);
+  const [chosenCard, setChosenCard] = useState(null);
+
+  const handleClick = (card) => {
+    setShowOptions(false);
+    setChosenCard(card);
+  };
+
   return (
     <>
       <div className="main-container">
-        <div className="wrapper">
-          <img className="triangle" src={triangle} />
-          <Paper />
-          <Scissors />
-          <Rock />
-        </div>
-
+        <Choice className={`${showOptions ? "" : "hidden"}`} handleClick={handleClick} />
+        <Game className={`${showOptions ? "hidden" : ""}`} chosenCard={chosenCard} />
         <Rules />
       </div>
     </>
