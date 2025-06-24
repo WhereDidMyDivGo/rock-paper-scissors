@@ -1,0 +1,38 @@
+.rules {
+  cursor: pointer;
+  transition: 0.3s;
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  width: 128px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  background-color: transparent;
+
+  &:hover {
+    background-color: #fff;
+
+    p {
+      color: #3b4262;
+    }
+  }
+
+  p {
+    transition: 0.3s;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rules {
+    position: unset;
+  }
+}
