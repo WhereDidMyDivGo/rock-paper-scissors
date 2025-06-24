@@ -7,20 +7,29 @@ import { useState, useEffect } from "react";
 
 function Game({ className, chosenCard }) {
   const cards = [<Rock />, <Paper />, <Scissors />];
-  const [randomCard, setRandomCard] = useState(null);
+  const [houseCard, setHouseCard] = useState(null);
 
   useEffect(() => {
     if (!chosenCard) return;
     setTimeout(() => {
       let count = 0;
       let interval;
+
       function rollTheSlotMachine() {
-        randomShuffle();
+        // randomly select a card from the cards array
+        const randIndex = Math.floor(Math.random() * 3);
+        const randomCard = cards[randIndex];
+        setHouseCard(randomCard);
+
         count++;
+
+        // stop at count 40 and determine the winner
         if (count >= 40) {
           clearTimeout(interval);
+          getWinner(chosenCard, randomCard);
           return;
         }
+
         // increase delay exponentially as count increases
         const progress = count / 40;
         const delay = 30 + (400 - 30) * Math.pow(progress, 2.5);
@@ -32,12 +41,15 @@ function Game({ className, chosenCard }) {
     return () => clearInterval(interval);
   }, [chosenCard]);
 
-  function randomShuffle() {
-    const rand = Math.floor(Math.random() * cards.length);
-    setRandomCard(cards[rand]);
+  function getWinner(player, house) {
+    if (player.type === house.type) {
+      console.log("draw");
+    } else if ((player.type === Rock && house.type === Scissors) || (player.type === Paper && house.type === Rock) || (player.type === Scissors && house.type === Paper)) {
+      console.log("win");
+    } else {
+      console.log("lose");
+    }
   }
-
-  const winner = getWinner(chosenCard, randomCard);
 
   return (
     <div className={`gameDiv ${className}`}>
@@ -48,7 +60,7 @@ function Game({ className, chosenCard }) {
 
       <div className="house-picked">
         <h1>THE HOUSE PICKED</h1>
-        <div className="circle">{randomCard}</div>
+        <div className="circle">{houseCard}</div>
       </div>
     </div>
   );
