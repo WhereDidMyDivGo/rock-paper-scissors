@@ -70,14 +70,21 @@
           line-height: 32px;
         }
 
-        button {
-          user-select: none;
-          border: none;
-          background: none;
+        .close-button-2 {
+          display: none;
+        }
+      }
 
-          img {
-            cursor: pointer;
-          }
+      button {
+        user-select: none;
+        border: none;
+        background: none;
+        width: 19.092px;
+        height: 19.092px;
+        flex-shrink: 0;
+
+        img {
+          cursor: pointer;
         }
       }
 
@@ -92,7 +99,32 @@
 }
 
 @media (max-width: 480px) {
-  .rules {
-    left: calc(50% - 64px);
+  .rulesDiv {
+    .rules-button {
+      left: calc(50% - 64px);
+    }
+
+    .modal-wrapper {
+      .rules-modal {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0px;
+        padding: 95px 0 65.91px 0;
+        gap: 113;
+
+        .rules-title {
+          width: fit-content;
+        }
+
+        .close-button-1 {
+          display: none;
+        }
+
+        .close-button-2 {
+          margin-top: auto;
+          display: block;
+        }
+      }
+    }
   }
 }

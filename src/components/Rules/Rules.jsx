@@ -25,11 +25,15 @@ function Rules() {
         <div className="rules-modal" ref={modalRef}>
           <div className="rules-title">
             <h1>RULES</h1>
-            <button onClick={() => setOpenRules(false)}>
+            <button className="close-button-1" onClick={() => setOpenRules(false)}>
               <img src={closeIcon} />
             </button>
           </div>
           <img className="rules-image" src={rulesImage} />
+
+          <button className="close-button-2" onClick={() => setOpenRules(false)}>
+            <img src={closeIcon} />
+          </button>
         </div>
       </div>
     </div>
