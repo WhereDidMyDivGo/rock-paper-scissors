@@ -5,8 +5,3 @@
   align-items: center;
   position: relative;
 }
-
-@media (max-width: 480px) {
-  .main-container {
-  }
-}
