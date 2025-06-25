@@ -2,7 +2,7 @@ import "./Game.css";
 
 import Rock from "../PickOptions/Rock";
 import Paper from "../PickOptions/Paper";
-import Scissors from "../PickOptions/Rock";
+import Scissors from "../PickOptions/Scissors";
 import { useState, useEffect } from "react";
 
 function Game({ className, chosenCard, setScore, setShowOptions }) {
