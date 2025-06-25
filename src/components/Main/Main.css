@@ -8,6 +8,5 @@
 
 @media (max-width: 480px) {
   .main-container {
-    justify-content: space-around;
   }
 }

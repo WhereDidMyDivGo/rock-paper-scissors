@@ -2,7 +2,7 @@ import "./Game.css";
 
 import Rock from "../PickOptions/Rock";
 import Paper from "../PickOptions/Paper";
-import Scissors from "../PickOptions/Scissors";
+import Scissors from "../PickOptions/Rock";
 import { useState, useEffect } from "react";
 
 function Game({ className, chosenCard, setScore, setShowOptions }) {
@@ -11,9 +11,9 @@ function Game({ className, chosenCard, setScore, setShowOptions }) {
 
   useEffect(() => {
     if (!chosenCard) return;
+    let interval;
     setTimeout(() => {
       let count = 0;
-      let interval;
 
       function rollTheSlotMachine() {
         // randomly select a card from the cards array
@@ -38,7 +38,7 @@ function Game({ className, chosenCard, setScore, setShowOptions }) {
       rollTheSlotMachine();
     }, 3000);
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(interval);
   }, [chosenCard]);
 
   function getWinner(player, house) {
@@ -53,6 +53,12 @@ function Game({ className, chosenCard, setScore, setShowOptions }) {
   }
 
   const [result, setResult] = useState(null);
+
+  function handleClick() {
+    setShowOptions(true);
+    setResult(null);
+    setHouseCard(null);
+  }
 
   return (
     <div className={`gameDiv ${className} ${!result ? "" : "done-game"}`}>
@@ -69,7 +75,7 @@ function Game({ className, chosenCard, setScore, setShowOptions }) {
           {result === "lose" && "YOU LOSE"}
           {result === "draw" && "DRAW"}
         </h1>
-        <button onClick={() => setShowOptions(true)}>
+        <button onClick={handleClick}>
           <p>PLAY AGAIN</p>
         </button>
       </div>

@@ -24,6 +24,7 @@
       line-height: 32px;
       letter-spacing: 3px;
     }
+
     .circle {
       animation: bounceOut 1s;
       width: 224.631px;
@@ -48,6 +49,7 @@
         }
 
         .option {
+          user-select: none;
           transform: scale(1.4777, 1.4124);
         }
       }
@@ -55,11 +57,11 @@
   }
 
   .result-div {
+    z-index: 1;
     position: absolute;
     display: flex;
     flex-direction: column;
     gap: 16px;
-
     top: 160px;
     left: calc(50% - 110px);
 
@@ -122,9 +124,93 @@
   }
 }
 
+@media (max-width: 950px) {
+  .gameDiv.done-game {
+    gap: 350px;
+  }
+}
+
+@media (max-width: 850px) {
+  .gameDiv {
+    margin-top: 110.32px;
+    gap: 100px;
+
+    .you-picked,
+    .house-picked {
+      flex-direction: column-reverse;
+      gap: 75px;
+
+      .circle {
+        width: 110px;
+        height: 110px;
+
+        .picked-card {
+          .option {
+            transform: scale(1, 1);
+          }
+        }
+      }
+    }
+
+    .result-div {
+      margin-top: 100px;
+    }
+
+    &.done-game {
+      gap: 100px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .gameDiv {
+    gap: 77.366px;
+
+    .you-picked,
+    .house-picked {
+      gap: 28.68px;
+
+      h1 {
+        font-size: 15px;
+        letter-spacing: 1.875px;
+      }
+
+      .circle {
+        width: 110px;
+        height: 110px;
+
+        .picked-card {
+          &.winner {
+            .option {
+              animation: winnerBorderMobile 1s 2s;
+              animation-fill-mode: both;
+            }
+          }
+        }
+      }
+    }
+
+    .result-div {
+      margin-top: 32px;
+    }
+
+    &.done-game {
+      gap: 77.366px;
+    }
+  }
+}
+
 @keyframes winnerBorder {
   to {
     box-shadow: 0 0 0 45.96px rgba(255, 255, 255, 0.05), 0 0 0 94.44px rgba(255, 255, 255, 0.05), 0 0 0 151.87px rgba(255, 255, 255, 0.05);
+    background: #fff;
+    border-radius: 50%;
+  }
+}
+
+@keyframes winnerBorderMobile {
+  to {
+    box-shadow: 0 0 0 19px rgba(255, 255, 255, 0.05), 0 0 0 47px rgba(255, 255, 255, 0.05), 0 0 0 79px rgba(255, 255, 255, 0.05);
     background: #fff;
     border-radius: 50%;
   }

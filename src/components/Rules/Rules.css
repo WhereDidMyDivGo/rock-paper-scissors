@@ -33,6 +33,6 @@
 
 @media (max-width: 480px) {
   .rules {
-    position: unset;
+    left: calc(50% - 64px);
   }
 }
