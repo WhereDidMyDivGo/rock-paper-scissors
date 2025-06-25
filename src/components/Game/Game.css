@@ -139,6 +139,7 @@
     .house-picked {
       flex-direction: column-reverse;
       gap: 75px;
+      width: 145px;
 
       .circle {
         width: 110px;

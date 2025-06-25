@@ -8,7 +8,7 @@
 }
 
 .app {
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background: radial-gradient(134.34% 134.34% at 50% 0%, #1f3757 0%, #131537 100%);
   display: flex;
   flex-direction: column;
