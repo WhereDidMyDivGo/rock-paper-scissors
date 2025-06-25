@@ -36,5 +36,10 @@
     .triangle {
       width: 166px;
     }
+
+    .option:hover {
+      box-shadow: none;
+      transform: none;
+    }
   }
 }

@@ -198,6 +198,12 @@
 
     .result-div {
       margin-top: 32px;
+
+      button:hover {
+        p {
+          color: #3b4262;
+        }
+      }
     }
 
     &.done-game {
