@@ -2,6 +2,8 @@
   margin-top: 72px;
   display: flex;
   gap: 140.37px;
+  position: relative;
+  transition: 1s;
 
   .you-picked,
   .house-picked {
@@ -11,6 +13,9 @@
     gap: 96.99px;
 
     h1 {
+      animation: fadeDown 1s;
+      animation-delay: 1s;
+      animation-fill-mode: both;
       color: #fff;
       text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
       font-size: 24px;
@@ -20,6 +25,7 @@
       letter-spacing: 3px;
     }
     .circle {
+      animation: bounceOut 1s;
       width: 224.631px;
       height: 224.631px;
       flex-shrink: 0;
@@ -29,9 +35,131 @@
       justify-content: center;
       align-items: center;
 
-      .option {
-        transform: scale(1.4777, 1.4124);
+      .picked-card {
+        animation: bounceOut 1s;
+        animation-delay: 2s;
+        animation-fill-mode: both;
+
+        &.winner {
+          .option {
+            animation: winnerBorder 1s 2s;
+            animation-fill-mode: both;
+          }
+        }
+
+        .option {
+          transform: scale(1.4777, 1.4124);
+        }
       }
     }
+  }
+
+  .result-div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    top: 160px;
+    left: calc(50% - 110px);
+
+    &:not(.hidden) {
+      width: 220px;
+
+      h1 {
+        animation: fadeUp 1s 1s;
+        animation-fill-mode: both;
+      }
+
+      button {
+        animation: fadeUp 1s 1.5s;
+        animation-fill-mode: both;
+      }
+    }
+
+    h1 {
+      min-width: 218px;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+      font-size: 56px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    button {
+      min-width: 220px;
+      width: 220px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: linear-gradient(0deg, #f3f3f3 0%, #fff 100%);
+      box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+        p {
+          color: #db2e4d;
+        }
+      }
+
+      p {
+        transition: 0.3s;
+        color: #3b4262;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: 2.5px;
+      }
+    }
+  }
+
+  &.done-game {
+    gap: 420.37px;
+  }
+}
+
+@keyframes winnerBorder {
+  to {
+    box-shadow: 0 0 0 45.96px rgba(255, 255, 255, 0.05), 0 0 0 94.44px rgba(255, 255, 255, 0.05), 0 0 0 151.87px rgba(255, 255, 255, 0.05);
+    background: #fff;
+    border-radius: 50%;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceOut {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }

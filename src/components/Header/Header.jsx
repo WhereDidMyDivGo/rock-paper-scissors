@@ -1,6 +1,6 @@
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ score }) => {
   return (
     <>
       <div className="headerDiv">
@@ -9,7 +9,7 @@ const Header = () => {
 
           <div>
             <p>SCORE</p>
-            <h1 className="score">0</h1>
+            <h1 className="score">{score}</h1>
           </div>
         </main>
       </div>

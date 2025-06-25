@@ -5,7 +5,7 @@ import Choice from "../Choice/Choice";
 import Game from "../Game/Game";
 import Rules from "../Rules/Rules";
 
-function Main() {
+function Main({ setScore }) {
   const [showOptions, setShowOptions] = useState(true);
   const [chosenCard, setChosenCard] = useState(null);
 
@@ -18,7 +18,7 @@ function Main() {
     <>
       <div className="main-container">
         <Choice className={`${showOptions ? "" : "hidden"}`} handleClick={handleClick} />
-        <Game className={`${showOptions ? "hidden" : ""}`} chosenCard={chosenCard} />
+        <Game className={`${showOptions ? "hidden" : ""}`} chosenCard={chosenCard} setScore={setScore} setShowOptions={setShowOptions} />
         <Rules />
       </div>
     </>
