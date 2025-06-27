@@ -3,42 +3,55 @@ import "./Game.css";
 import Rock from "../PickOptions/Rock";
 import Paper from "../PickOptions/Paper";
 import Scissors from "../PickOptions/Scissors";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
+import tickSound from "../../assets/audio/tick.mp3";
+import winSound from "../../assets/audio/win.mp3";
+import loseSound from "../../assets/audio/lose.mp3";
 
 function Game({ className, chosenCard, setScore, setShowOptions }) {
   const cards = [<Rock />, <Paper />, <Scissors />];
   const [houseCard, setHouseCard] = useState(null);
+  const [result, setResult] = useState(null);
+
+  // refs for mutable values that persist across renders
+  const countRef = useRef(0);
+  const currentIndexRef = useRef(0);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     if (!chosenCard) return;
-    let interval;
-    setTimeout(() => {
-      let count = 0;
+    countRef.current = 0;
+    currentIndexRef.current = Math.floor(Math.random() * 3);
+    function rollTheSlotMachine() {
+      setHouseCard(cards[currentIndexRef.current]);
 
-      function rollTheSlotMachine() {
-        // randomly select a card from the cards array
-        const randIndex = Math.floor(Math.random() * 3);
-        const randomCard = cards[randIndex];
-        setHouseCard(randomCard);
+      countRef.current++;
 
-        count++;
-
-        // stop at count 40 and determine the winner
-        if (count >= 40) {
-          clearTimeout(interval);
-          getWinner(chosenCard, randomCard);
-          return;
-        }
-
-        // increase delay exponentially as count increases
-        const progress = count / 40;
-        const delay = 30 + (400 - 30) * Math.pow(progress, 2.5);
-        interval = setTimeout(rollTheSlotMachine, delay);
+      // stop at count 40 and determine the winner
+      if (countRef.current >= 40) {
+        clearTimeout(intervalRef.current);
+        getWinner(chosenCard, cards[currentIndexRef.current]);
+        // play tick sound
+        const tick = new Audio(tickSound);
+        tick.play();
+        return;
       }
-      rollTheSlotMachine();
-    }, 3000);
 
-    return () => clearTimeout(interval);
+      // move to next index, wrap around
+      currentIndexRef.current = (currentIndexRef.current + 1) % 3;
+
+      // play tick sound
+      const tick = new Audio(tickSound);
+      tick.play();
+
+      // increase delay exponentially as count increases
+      const progress = countRef.current / 40;
+      const delay = 30 + (400 - 30) * Math.pow(progress, 2.5);
+      intervalRef.current = setTimeout(rollTheSlotMachine, delay);
+    }
+    setTimeout(rollTheSlotMachine, 3000);
+    return () => clearTimeout(intervalRef.current);
   }, [chosenCard]);
 
   function getWinner(player, house) {
@@ -47,12 +60,18 @@ function Game({ className, chosenCard, setScore, setShowOptions }) {
     } else if ((player.type === Rock && house.type === Scissors) || (player.type === Paper && house.type === Rock) || (player.type === Scissors && house.type === Paper)) {
       setResult("win");
       setScore((prev) => prev + 1);
+      setTimeout(() => {
+        const win = new Audio(winSound);
+        win.play();
+      }, 1000);
     } else {
       setResult("lose");
+      setTimeout(() => {
+        const lose = new Audio(loseSound);
+        lose.play();
+      }, 1000);
     }
   }
-
-  const [result, setResult] = useState(null);
 
   function handleClick() {
     setShowOptions(true);
